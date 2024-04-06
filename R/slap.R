@@ -32,7 +32,10 @@
       !!expr,
       error = function(err) {
         message <- !!message
-        error_call <- frame$.__error_call__. %||% frame$error_call
+        error_call <- frame$.__error_call__.
+        if (is.null(error_call)) {
+          error_call <- frame$error_call
+        }
         if (identical(error_call, rlang::error_call)) {
           error_call <- NULL
         }

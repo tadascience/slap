@@ -1,26 +1,17 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # slap
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/slap)](https://CRAN.R-project.org/package=slap)
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/slap)](https://CRAN.R-project.org/package=slap)
 <!-- badges: end -->
 
-The goal of slap is to ...
+The goal of slap is to …
 
 ## Installation
 
@@ -32,7 +23,7 @@ pak::pak("tadascience/slap")
 
 ## Example
 
-```{r, eval = FALSE}
+``` r
 library(dplyr)
 library(slap)
 
