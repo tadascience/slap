@@ -1,0 +1,18 @@
+Package: slap
+Title: Slap Light Alternative Plight 
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Romain", "François", email = "romain@tada.science", role = c("aut", "cre")), 
+    person("tada.science", role = c("cph", "fnd"))
+  )
+Description: Alternative to using withCallingHandlers inthe simple case. 
+License: MIT + file LICENSE
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports: 
+    cli,
+    rlang
