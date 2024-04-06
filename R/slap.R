@@ -24,14 +24,12 @@
 #' @name slap
 #' @export
 `%!%` <- function(expr, message) {
-  expr <- enquo(expr)
-  or <- enquo(message)
-
   quo <- quo(
     withCallingHandlers(
-      !!expr,
+      {{ expr }},
       error = function(err) {
-        message <- !!message
+        message <- {{ message }}
+
         error_call <- env$.__error_call__.
         if (is.null(error_call)) {
           error_call <- env$error_call
@@ -39,6 +37,7 @@
         if (identical(error_call, rlang::error_call)) {
           error_call <- NULL
         }
+
         cli::cli_abort(message, parent = err, call = error_call)
       }
     )
