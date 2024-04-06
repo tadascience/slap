@@ -21,9 +21,9 @@
 #'   h()
 #' }
 #'
-#' @rdname slap
+#' @name slap
 #' @export
-`%!%` <- function(expr, message, env = caller_env()) {
+`%!%` <- function(expr, message) {
   expr <- enquo(expr)
   or <- enquo(message)
 
@@ -32,9 +32,9 @@
       !!expr,
       error = function(err) {
         message <- !!message
-        error_call <- frame$.__error_call__.
+        error_call <- env$.__error_call__.
         if (is.null(error_call)) {
-          error_call <- frame$error_call
+          error_call <- env$error_call
         }
         if (identical(error_call, rlang::error_call)) {
           error_call <- NULL
@@ -43,5 +43,7 @@
       }
     )
   )
-  eval_tidy(quo, env = env, data = list(frame = env))
+
+  env <- caller_env()
+  eval_tidy(quo, env = env, data = list(env = env))
 }
