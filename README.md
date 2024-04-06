@@ -9,6 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/slap)](https://CRAN.R-project.org/package=slap)
+[![R-CMD-check](https://github.com/tadascience/slap/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tadascience/slap/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of slap is to …
