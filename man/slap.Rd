@@ -3,15 +3,20 @@
 \name{slap}
 \alias{slap}
 \alias{\%!\%}
+\alias{\%!!\%}
 \title{Slap Operator}
 \usage{
 expr \%!\% message
+
+expr \%!!\% message
 }
 \arguments{
 \item{expr}{An \link[rlang:topic-defuse]{expression} or
 \link[rlang:topic-quosure]{quosure} to evaluate.}
 
 \item{message}{It is formatted via a call to \code{\link[cli:cli_bullets]{cli_bullets()}}.}
+
+\item{keep_parent}{If TRUE, the caught error is kept as the parent error}
 }
 \description{
 Slap Operator
