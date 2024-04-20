@@ -38,7 +38,6 @@ slap <- function(expr, message, env = caller_env(), keep_parent = TRUE) {
     withCallingHandlers(
       {{ expr }},
       error = function(err) {
-
         message <- {{ message }}
         if (is.function(message)) {
           message <- message(err)
@@ -49,7 +48,7 @@ slap <- function(expr, message, env = caller_env(), keep_parent = TRUE) {
           error_call <- env$error_call
         }
 
-        cli_abort(message, parent = if (keep_parent) err, call = error_call)
+        cli::cli_abort(message, parent = if (keep_parent) err, call = error_call)
       }
     )
   )
