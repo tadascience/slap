@@ -28,7 +28,7 @@ pak::pak("tadascience/slap")
 library(dplyr)
 library(slap)
 
-boom <- function() stop("ouch")
+boom <- function() stop("An error occured in boom()")
 
 # instead of:
 withCallingHandlers(
@@ -39,5 +39,9 @@ withCallingHandlers(
 )
 
 # just use the slap operator, i.e. %!%
-summarise(mtcars, mpg = boom()) %!% "ouch" 
+summarise(mtcars, mpg = boom()) %!% "ouch"
+
+# or use the double slap operator for simpler error
+# i.e. without keeping the parent error
+summarise(mtcars, mpg = boom()) %!!% "ouch" 
 ```
