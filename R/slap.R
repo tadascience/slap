@@ -2,7 +2,6 @@
 #'
 #' @inheritParams rlang::eval_tidy
 #' @inheritParams cli::cli_abort
-#' @param keep_parent If TRUE, the caught error is kept as the parent error
 #'
 #' @examples
 #' g <- function() {
@@ -34,7 +33,6 @@
   slap({{ expr}}, {{ message }}, env = caller_env(), keep_parent = FALSE)
 }
 
-#' @export
 slap <- function(expr, message, env = caller_env(), keep_parent = TRUE) {
   quo <- quo(
     withCallingHandlers(
@@ -61,4 +59,3 @@ slap <- function(expr, message, env = caller_env(), keep_parent = TRUE) {
 
   eval_tidy(quo, env = env, data = list(env = env, keep_parent = keep_parent))
 }
-

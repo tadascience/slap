@@ -15,8 +15,6 @@ expr \%!!\% message
 \link[rlang:topic-quosure]{quosure} to evaluate.}
 
 \item{message}{It is formatted via a call to \code{\link[cli:cli_bullets]{cli_bullets()}}.}
-
-\item{keep_parent}{If TRUE, the caught error is kept as the parent error}
 }
 \description{
 Slap Operator
