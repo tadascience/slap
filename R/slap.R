@@ -48,11 +48,8 @@ slap <- function(expr, message, env = caller_env(), keep_parent = TRUE) {
         if (is.null(error_call)) {
           error_call <- env$error_call
         }
-        if (identical(error_call, rlang::error_call)) {
-          error_call <- NULL
-        }
 
-        cli::cli_abort(message, parent = if (keep_parent) err, call = error_call)
+        cli_abort(message, parent = if (keep_parent) err, call = error_call)
       }
     )
   )
