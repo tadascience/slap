@@ -1,11 +1,11 @@
 Package: slap
-Title: Slap Light Alternative Plight 
-Version: 0.0.0.9000
+Title: Simplified Error Handling
+Version: 2024.4.1
 Authors@R: c(
     person("Romain", "François", email = "romain@tada.science", role = c("aut", "cre")), 
     person("tada.science", role = c("cph", "fnd"))
   )
-Description: Alternative to using withCallingHandlers inthe simple case. 
+Description: Alternative to using withCallingHandlers in the simple case. 
 License: MIT + file LICENSE
 Suggests: 
     testthat (>= 3.0.0)
