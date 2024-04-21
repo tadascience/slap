@@ -1,24 +1,29 @@
 #' Slap Operator
 #'
-#' @inheritParams rlang::eval_tidy
-#' @inheritParams cli::cli_abort
+#' @param expr An expression or quosure to evaluate carefully
+#' @param message A message meant to be formatted by [cli::cli_bullets()]
+#'
+#' When `expr` generates an error, the `%!%` and `%!!%` operators
+#' catch it and embed it in a new error thrown by [cli::cli_abort()]
+#' with `message`.
+#'
+#' When the current environment has an `error_call` object, it is
+#' used as the `call` argument of [cli::cli_abort()]
 #'
 #' @examples
+#'
 #' g <- function() {
 #'   stop("ouch")
 #' }
-#' f <- function(error_call = current_env()) {
+#' h <- function(error_call = rlang::caller_env()) {
 #'   g() %!% "bam"
 #' }
-#' h <- function() {
-#'   rlang::local_error_call(quote(foo()))
-#'
-#'   g() %!% "bam"
+#' f <- function() {
+#'   h()
 #' }
 #'
 #' \dontrun{
 #'   f()
-#'   h()
 #' }
 #'
 #' @name slap

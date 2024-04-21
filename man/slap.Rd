@@ -11,30 +11,34 @@ expr \%!\% message
 expr \%!!\% message
 }
 \arguments{
-\item{expr}{An \link[rlang:topic-defuse]{expression} or
-\link[rlang:topic-quosure]{quosure} to evaluate.}
+\item{expr}{An expression or quosure to evaluate carefully}
 
-\item{message}{It is formatted via a call to \code{\link[cli:cli_bullets]{cli_bullets()}}.}
+\item{message}{A message meant to be formatted by \code{\link[cli:cli_bullets]{cli::cli_bullets()}}
+
+When \code{expr} generates an error, the \verb{\%!\%} and \verb{\%!!\%} operators
+catch it and embed it in a new error thrown by \code{\link[cli:cli_abort]{cli::cli_abort()}}
+with \code{message}.
+
+When the current environment has an \code{error_call} object, it is
+used as the \code{call} argument of \code{\link[cli:cli_abort]{cli::cli_abort()}}}
 }
 \description{
 Slap Operator
 }
 \examples{
+
 g <- function() {
   stop("ouch")
 }
-f <- function(error_call = current_env()) {
+h <- function(error_call = rlang::caller_env()) {
   g() \%!\% "bam"
 }
-h <- function() {
-  rlang::local_error_call(quote(foo()))
-
-  g() \%!\% "bam"
+f <- function() {
+  h()
 }
 
 \dontrun{
   f()
-  h()
 }
 
 }
