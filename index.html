@@ -72,11 +72,10 @@
 </div>
 <!-- badges: start -->
 
-<p>The goal of slap is to …</p>
+<p>The goal of slap is simplify error handling.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of slap like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"tadascience/slap"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -87,9 +86,13 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tadascience/slap" class="external-link">slap</a></span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># suppose you have a function that throws an error</span></span>
 <span><span class="va">boom</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"An error occured in boom()"</span><span class="op">)</span></span>
+<span><span class="co"># and you want to use it in e.g. dplyr::summarise()</span></span>
+<span><span class="co"># summarise(mtcars, mpg = boom())</span></span>
 <span></span>
-<span><span class="co"># instead of:</span></span>
+<span><span class="co"># if you want to catch it and rethrow an error that is more</span></span>
+<span><span class="co"># meaningful to you, one way is to use withCallingHandlers()</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">withCallingHandlers</a></span><span class="op">(</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span><span class="va">mtcars</span>, mpg <span class="op">=</span> <span class="fu">boom</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>  error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">err</span><span class="op">)</span> <span class="op">{</span></span>
@@ -97,11 +100,11 @@
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># just use the slap operator, i.e. %!%</span></span>
+<span><span class="co"># but that's kind of boring, so instead you can use the </span></span>
+<span><span class="co"># slap operator %!% to slap away the eror</span></span>
 <span><span class="fu">summarise</span><span class="op">(</span><span class="va">mtcars</span>, mpg <span class="op">=</span> <span class="fu">boom</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/slap.html">%!%</a></span> <span class="st">"ouch"</span></span>
 <span></span>
-<span><span class="co"># or use the double slap operator for simpler error</span></span>
-<span><span class="co"># i.e. without keeping the parent error</span></span>
+<span><span class="co"># or the double slap operator %!!% if you don't want to keep the parent error</span></span>
 <span><span class="fu">summarise</span><span class="op">(</span><span class="va">mtcars</span>, mpg <span class="op">=</span> <span class="fu">boom</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/slap.html">%!!%</a></span> <span class="st">"ouch"</span> </span></code></pre></div>
 </div>
 </div>
