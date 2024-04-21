@@ -12,11 +12,9 @@ status](https://www.r-pkg.org/badges/version/slap)](https://CRAN.R-project.org/p
 [![R-CMD-check](https://github.com/tadascience/slap/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tadascience/slap/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of slap is to …
+The goal of slap is simplify error handling.
 
 ## Installation
-
-You can install the development version of slap like so:
 
 ``` r
 pak::pak("tadascience/slap")
@@ -28,9 +26,13 @@ pak::pak("tadascience/slap")
 library(dplyr)
 library(slap)
 
+# suppose you have a function that throws an error
 boom <- function() stop("An error occured in boom()")
+# and you want to use it in e.g. dplyr::summarise()
+# summarise(mtcars, mpg = boom())
 
-# instead of:
+# if you want to catch it and rethrow an error that is more
+# meaningful to you, one way is to use withCallingHandlers()
 withCallingHandlers(
   summarise(mtcars, mpg = boom()), 
   error = function(err) {
@@ -38,10 +40,10 @@ withCallingHandlers(
   }
 )
 
-# just use the slap operator, i.e. %!%
+# but that's kind of boring, so instead you can use the 
+# slap operator %!% to slap away the eror
 summarise(mtcars, mpg = boom()) %!% "ouch"
 
-# or use the double slap operator for simpler error
-# i.e. without keeping the parent error
+# or the double slap operator %!!% if you don't want to keep the parent error
 summarise(mtcars, mpg = boom()) %!!% "ouch" 
 ```
