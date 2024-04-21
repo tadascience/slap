@@ -16,5 +16,5 @@ RoxygenNote: 7.3.1
 Imports: 
     cli,
     rlang
-URL: https://github.com/tadascience/slap, http://tada.science/slap/
+URL: https://github.com/tadascience/slap, https://slap.tada.science
 BugReports: https://github.com/tadascience/slap/issues
