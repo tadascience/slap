@@ -5,7 +5,7 @@ Authors@R: c(
     person("Romain", "François", email = "romain@tada.science", role = c("aut", "cre")), 
     person("tada.science", role = c("cph", "fnd"))
   )
-Description: Alternative to using withCallingHandlers in the simple case. 
+Description: Alternative to using withCallingHandlers() in the simple case. 
 License: MIT + file LICENSE
 Suggests: 
     testthat (>= 3.0.0)
