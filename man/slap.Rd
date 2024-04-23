@@ -13,32 +13,51 @@ expr \%!!\% message
 \arguments{
 \item{expr}{An expression or quosure to evaluate carefully}
 
-\item{message}{A message meant to be formatted by \code{\link[cli:cli_bullets]{cli::cli_bullets()}}
+\item{message}{A message meant to be formatted by \code{\link[cli:cli_bullets]{cli::cli_bullets()}} or a
+function.}
+}
+\value{
+If \code{expr} succeeds, its result is returned.
 
 When \code{expr} generates an error, the \verb{\%!\%} and \verb{\%!!\%} operators
-catch it and embed it in a new error thrown by \code{\link[cli:cli_abort]{cli::cli_abort()}}
-with \code{message}.
+catch it and embed it in a new error thrown by \code{\link[cli:cli_abort]{cli::cli_abort()}}.
+
+If \code{message} evaluates to a character vector, it is used as the
+\code{message} argument of \code{\link[cli:cli_abort]{cli::cli_abort()}}.
+
+If \code{message} evaluates to a function, the function is called with one
+argument: the caught error from evaluating \code{expr}.
 
 When the current environment has an \code{error_call} object, it is
-used as the \code{call} argument of \code{\link[cli:cli_abort]{cli::cli_abort()}}}
+used as the \code{call} argument of \code{\link[cli:cli_abort]{cli::cli_abort()}}.
 }
 \description{
 Slap Operator
 }
 \examples{
-
+# g() throws an error
 g <- function() {
   stop("ouch")
 }
+
+# h() catches that error and embed it in a new error
+# with "bam" as its message, the g() error as the parent error,
+# and the caller environment as call=
 h <- function(error_call = rlang::caller_env()) {
   g() \%!\% "bam"
 }
+
+# f() will be used as the error call
 f <- function() {
   h()
 }
 
-\dontrun{
-  f()
-}
+# Error in `f()`:
+# ! bam
+# Caused by error in `g()`:
+# ! ouch
+tryCatch(f(), error = function(err) {
+  print(err, backtrace = FALSE)
+})
 
 }

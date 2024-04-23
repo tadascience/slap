@@ -1,30 +1,48 @@
 #' Slap Operator
 #'
 #' @param expr An expression or quosure to evaluate carefully
-#' @param message A message meant to be formatted by [cli::cli_bullets()]
+#' @param message A message meant to be formatted by [cli::cli_bullets()] or a
+#'   function.
+#'
+#' @return If `expr` succeeds, its result is returned.
 #'
 #' When `expr` generates an error, the `%!%` and `%!!%` operators
-#' catch it and embed it in a new error thrown by [cli::cli_abort()]
-#' with `message`.
+#' catch it and embed it in a new error thrown by [cli::cli_abort()].
+#'
+#' If `message` evaluates to a character vector, it is used as the
+#' `message` argument of [cli::cli_abort()].
+#'
+#' If `message` evaluates to a function, the function is called with one
+#' argument: the caught error from evaluating `expr`.
 #'
 #' When the current environment has an `error_call` object, it is
-#' used as the `call` argument of [cli::cli_abort()]
+#' used as the `call` argument of [cli::cli_abort()].
 #'
 #' @examples
-#'
+#' # g() throws an error
 #' g <- function() {
 #'   stop("ouch")
 #' }
+#'
+#' # h() catches that error and embed it in a new error
+#' # with "bam" as its message, the g() error as the parent error,
+#' # and the caller environment as call=
 #' h <- function(error_call = rlang::caller_env()) {
 #'   g() %!% "bam"
 #' }
+#'
+#' # f() will be used as the error call
 #' f <- function() {
 #'   h()
 #' }
 #'
-#' \dontrun{
-#'   f()
-#' }
+#' # Error in `f()`:
+#' # ! bam
+#' # Caused by error in `g()`:
+#' # ! ouch
+#' tryCatch(f(), error = function(err) {
+#'   print(err, backtrace = FALSE)
+#' })
 #'
 #' @name slap
 #' @export
