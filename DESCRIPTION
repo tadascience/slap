@@ -5,7 +5,10 @@ Authors@R: c(
     person("Romain", "François", email = "romain@tada.science", role = c("aut", "cre")), 
     person("tada.science", role = c("cph", "fnd"))
   )
-Description: Alternative to using withCallingHandlers() in the simple case. 
+Description: Alternative to using withCallingHandlers() in the simple case of catch 
+  and rethrow. The `%!%` operator evaluates the expression on its left hand side, 
+  and if an error occurs, the right hand side is used to construct a new error
+  that embeds the original error. 
 License: MIT + file LICENSE
 Suggests: 
     testthat (>= 3.0.0)
