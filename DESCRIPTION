@@ -1,6 +1,6 @@
 Package: slap
 Title: Simplified Error Handling
-Version: 2024.4.1
+Version: 2024.4.1.9000
 Authors@R: c(
     person("Romain", "François", email = "romain@tada.science", role = c("aut", "cre")), 
     person("tada.science", role = c("cph", "fnd"))
