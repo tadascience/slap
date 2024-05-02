@@ -1,5 +1,3 @@
 # slap (development version)
 
-# slap 2024.4.1
-
-* Initial CRAN submission.
+* Added a `NEWS.md` file to track changes to the package.
